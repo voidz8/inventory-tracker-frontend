@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.page-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+form{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    align-items: center;
+    background: #acacb9;
+    border-radius: 10px;
+    height: 250px;
+}
+
+.auth{
+    margin: auto;
+    background: #24242A;
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 6px;
+}
+
+label{
+    margin-top: 5px;
+}
+
+header{
+    text-decoration: underline;
+    vertical-align: top;
+}
+
+p {
+    font-size: 12px;
+    margin: auto;
+}
