@@ -10,10 +10,8 @@
 }
 
 .input-image{
-    top: 4px;
     position: absolute;
     align-items: center;
-    left: 5px;
     width: 25px;
     height: 25px;
 }

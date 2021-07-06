@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import TopMenu from "../components/TopMenu";
 import "./AuthPage.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { authContext } from "../contexts/AuthContext";
 
 function SignInPage() {
-  const url = "http://localhost:3000/";
-
+  const url = "http://localhost:8080/";
+  const { login } = useContext(authContext);
   const history = useHistory();
 
   const { handleSubmit, register } = useForm();
-  function onSubmit(data) {
-    // try {
-    //   const response = await axios.post(url + "signup")
-    // }catch (e){
-    //   console.error(e)
-    // }
-    console.log(data);
+
+  async function onSubmit(data) {
+    try {
+      const response = await axios.post(url + "signin", {
+        username: data.username,
+        password: data.password,
+      });
+      login(response.data.token);
+      history.push("/");
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return (
@@ -52,4 +58,5 @@ function SignInPage() {
     </div>
   );
 }
+
 export default SignInPage;

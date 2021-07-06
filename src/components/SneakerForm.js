@@ -15,12 +15,16 @@ function SneakerForm() {
   }
 
   return (
-    <div className={"container"}>
+    <div className={"form-container"}>
       <form onSubmit={onFormSubmit}>
-        <header>Add Sneaker</header>
+        <header className={"form-header"}>Add Sneaker</header>
         <div className={"fieldset-container"}>
           <fieldset>
-            <IconInputField icon={sneakericon} placeholder={"SNEAKER NAME"} />
+            <IconInputField
+              icon={sneakericon}
+              placeholder={"SNEAKER NAME"}
+              maxlength={35}
+            />
             <IconInputField icon={priceicon} placeholder={"PRICE"} />
             <IconInputField icon={stylecodeicon} placeholder={"STYLECODE"} />
           </fieldset>

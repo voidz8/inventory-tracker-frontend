@@ -3,21 +3,18 @@
     margin: 0;
 }
 
-.container{
-    background-color: #525260;
-    height: 200px;
-    width: 500px;
-    border-radius: 8px;
-}
-
-form{
+.form-container{
     display: flex;
     flex-direction: column;
+    background-color: #525260;
+    height: 220px;
+    width: 500px;
+    border-radius: 20px;
+    align-items: center;
 }
 
 .fieldset-container{
     display: flex;
-
 }
 
 fieldset{
@@ -29,12 +26,9 @@ fieldset{
     align-items: center;
 }
 
-
-
-
-#upload{
+.upload{
      width: 200px;
-     background: #acacb9;
+     background-color: #acacb9;
      color: #24242A;
 }
 
@@ -43,7 +37,7 @@ fieldset{
     background: #146648;
 }
 
-header{
+.form-header{
     text-align: center;
     font-size: 25px;
 }
