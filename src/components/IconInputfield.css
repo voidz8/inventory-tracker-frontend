@@ -1,7 +1,7 @@
 .input-field{
     display: flex;
     position: relative;
-    margin: 5px;
+    padding: 5px;
 }
 
 .input{
@@ -11,7 +11,7 @@
 
 .input-image{
     position: absolute;
-    align-items: center;
     width: 25px;
     height: 25px;
+    margin: 5px;
 }

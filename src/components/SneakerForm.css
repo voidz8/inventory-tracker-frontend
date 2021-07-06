@@ -1,16 +1,11 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-
 .form-container{
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     background-color: #525260;
     height: 220px;
     width: 500px;
     border-radius: 20px;
-    align-items: center;
 }
 
 .fieldset-container{
@@ -22,19 +17,29 @@ fieldset{
     display: flex;
     flex-direction: column;
     border: 0;
-    justify-content: space-evenly;
     align-items: center;
 }
 
 .upload{
-     width: 200px;
-     background-color: #acacb9;
-     color: #24242A;
+    width: 200px;
+    height: 35px;
+    background-color: #acacb9;
+    color: #24242A;
+    line-height: 10px;
+    margin: auto;
 }
 
 #add{
-    width: 200px;
-    background: #146648;
+    height: 35px;
+    width: 150px;
+    background: green;
+    line-height: 10px;
+}
+#cancel{
+    height: 35px;
+    width: 150px;
+    background: red;
+    line-height: 10px;
 }
 
 .form-header{

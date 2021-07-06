@@ -34,6 +34,9 @@ function SneakerForm() {
             <button className={"upload"}>Upload Picture</button>
           </fieldset>
         </div>
+        <button type={"button"} id={"cancel"} onClick={""}>
+          Cancel
+        </button>
         <button type={"submit"} id={"add"}>
           Add
         </button>
