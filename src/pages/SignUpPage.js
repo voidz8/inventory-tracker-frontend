@@ -42,7 +42,7 @@ function SignUpPage() {
     <div>
       <TopMenu />
       <div className={"page-container"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={"auth-form"} onSubmit={handleSubmit(onSubmit)}>
           <header>Sign Up</header>
           <label htmlFor={"sign-up-username-field"}>Username</label>
           <input
