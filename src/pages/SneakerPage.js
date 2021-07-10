@@ -44,8 +44,6 @@ function SneakerPage() {
             />
           );
         })}
-        {/*</div>*/}
-        {/*<div className={"button-form"}>*/}
         {!formOpen && (
           <button
             type={"button"}

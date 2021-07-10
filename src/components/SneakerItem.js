@@ -6,12 +6,10 @@ import { authContext } from "../contexts/AuthContext";
 
 function SneakerItem({ name, image, size, price, date }) {
   const { url } = useContext(authContext);
-  const [sold, setSold] = useState(false);
 
   // todo
   async function markAsSold() {
     const response = await axios.post(url + "");
-    setSold(true);
     image = soldIcon;
   }
 
@@ -24,16 +22,10 @@ function SneakerItem({ name, image, size, price, date }) {
           <h3>Size: {size}</h3>
           <h3>Price: {price}</h3>
           <h3>Date: {date}</h3>
-          {sold && <h3>Sold on: </h3>}
           <h3>Invoice</h3>
         </div>
       </div>
-      <button
-        type={"button"}
-        onClick={markAsSold}
-        disabled={sold}
-        className={"sold-button"}
-      >
+      <button type={"button"} className={"sold-button"}>
         Sold
       </button>
     </div>
