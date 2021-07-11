@@ -1,0 +1,16 @@
+.chart-name{
+    margin-left: 60px;
+    justify-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+
+.charts-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chart{
+    flex: 1 1 50%;
+}
