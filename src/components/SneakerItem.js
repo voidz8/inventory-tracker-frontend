@@ -1,7 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./SneakerItem.css";
-import soldIcon from "../assets/sold.png";
-import axios from "axios";
 import { sneakerContext } from "../contexts/SneakerContext";
 import SaleForm from "./SaleForm";
 

@@ -2,7 +2,6 @@ import React from "react";
 import {
   Area,
   AreaChart,
-  Label,
   Legend,
   ResponsiveContainer,
   Tooltip,

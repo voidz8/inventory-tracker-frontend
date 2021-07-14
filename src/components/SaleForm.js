@@ -6,7 +6,7 @@ import { sneakerContext } from "../contexts/SneakerContext";
 
 function SaleForm() {
   const { handleSubmit, register } = useForm();
-  const { saleMenuOpen, setSaleMenuOpen } = useContext(sneakerContext);
+  const { setSaleMenuOpen } = useContext(sneakerContext);
 
   async function onFormSubmit() {}
 

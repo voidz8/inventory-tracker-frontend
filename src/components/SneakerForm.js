@@ -10,9 +10,9 @@ import axios from "axios";
 import { sneakerContext } from "../contexts/SneakerContext";
 
 function SneakerForm() {
-  const { addSneakerForm, setAddSneakerForm } = useContext(sneakerContext);
+  const { setAddSneakerForm } = useContext(sneakerContext);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const { handleSubmit, register } = useForm();
 
   const url = "http://localhost:8080/";
@@ -28,7 +28,7 @@ function SneakerForm() {
     formData.append("pid", data.stylecode);
     formData.append("photo", data.photo[0]);
 
-    const response = axios.post(url + "sneakers", formData, {
+    axios.post(url + "sneakers", formData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "content-type": "mulitpart/form-data",
