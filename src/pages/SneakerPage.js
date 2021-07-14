@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import TopMenu from "../components/TopMenu";
 import SneakerForm from "../components/SneakerForm";
 import "./SneakerPage.css";
 import SneakerItem from "../components/SneakerItem";
 import axios from "axios";
+import { sneakerContext } from "../contexts/SneakerContext";
 
 function SneakerPage() {
   const history = useHistory();
   const [sneakers, setSneakers] = useState([]);
-  const [formOpen, setFormOpen] = useState(false);
+  const [images, setImages] = useState([]);
+  const { addSneakerForm, setAddSneakerForm } = useContext(sneakerContext);
 
   useEffect(() => {
     async function getSneakerData() {
@@ -20,13 +22,29 @@ function SneakerPage() {
           },
         });
         setSneakers(response.data);
-        console.log(response);
       } catch (e) {
         console.error(e);
       }
     }
 
+    async function getSneakerImages(sneakers) {
+      for (const sneaker of sneakers) {
+        console.log(sneaker);
+        try {
+          const images = await axios.get(
+            "http://localhost:8080/sneakers/image",
+            {
+              params: {
+                sneakerId: sneaker.id,
+              },
+            }
+          );
+        } catch (e) {}
+      }
+    }
+
     getSneakerData();
+    getSneakerImages(sneakers).then((r) => setImages(r));
   }, []);
 
   return (
@@ -41,19 +59,20 @@ function SneakerPage() {
               date={sneaker.dateBought}
               price={sneaker.priceBought}
               size={sneaker.sneakerSize}
+              sell={true}
             />
           );
         })}
-        {!formOpen && (
+        {!addSneakerForm && (
           <button
             type={"button"}
-            onClick={() => setFormOpen(true)}
+            onClick={() => setAddSneakerForm(true)}
             className={"add-button"}
           >
             +
           </button>
         )}
-        {formOpen && <SneakerForm className={"sneaker-form"} />}
+        {addSneakerForm && <SneakerForm className={"sneaker-form"} />}
       </div>
     </div>
   );

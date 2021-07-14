@@ -19,15 +19,15 @@ function AuthContextProvider(props) {
     }
   }, []);
 
-  async function getUserInfo(token) {
-    try {
-      const response = await axios.get(url + "/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // async function getUserInfo(token) {
+  //   try {
+  //     const response = await axios.get(url + "/user", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   function login(token) {
     localStorage.setItem("token", token);
@@ -39,7 +39,11 @@ function AuthContextProvider(props) {
     history.push("/login");
   }
 
-  const data = { authState: authState, login: login, logout: logout };
+  function showSignIn() {
+    return authState.user != null;
+  }
+
+  const data = { authState, setAuthState, login, logout };
   return (
     <authContext.Provider value={data}>{props.children}</authContext.Provider>
   );

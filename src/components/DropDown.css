@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+.menu-container{
+    display: inline-block;
+    position: relative;
+}
+
+.menu-btn{
+    font-family: 'Orbitron', 'Arial' ,sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 25px;
+    width: 180px;
+}
+
+.menu-btn:hover{
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+.menu-list{
+    list-style: none;
+    background-color:#c731bf;
+}

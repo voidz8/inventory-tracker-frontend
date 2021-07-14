@@ -10,6 +10,7 @@
     height: 220px;
     background-color: #525260;
     border-radius: 20px;
+    margin: 20px;
 }
 
 .fields {
@@ -38,4 +39,9 @@ h3{
     background-color: green;
     align-self: flex-end;
     margin-top: -30px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
 }

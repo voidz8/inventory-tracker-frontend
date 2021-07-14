@@ -8,6 +8,7 @@ import BotPage from "./pages/BotPage";
 import ProfilePage from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import SoldSneakerPage from "./pages/SoldSneakerPage";
 
 function App() {
   return (
@@ -34,7 +35,10 @@ function App() {
         <SignInPage />
       </Route>
       <Route>
-        <SignUpPage path={"/sign-up"} />
+        <SoldSneakerPage exact path={"sold-sneakers"} />
+      </Route>
+      <Route>
+        <SignUpPage exact path={"/sign-up"} />
       </Route>
     </Switch>
   );

@@ -6,3 +6,7 @@
 body{
     background-color: #24242A;
 }
+
+button:hover{
+    cursor: pointer;
+}

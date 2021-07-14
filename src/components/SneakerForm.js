@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./SneakerForm.css";
 import IconInputField from "./IconInputfield";
@@ -7,59 +7,36 @@ import priceicon from "../assets/dollar.png";
 import stylecodeicon from "../assets/stylecode-icon.png";
 import sizeicon from "../assets/size.png";
 import axios from "axios";
+import { sneakerContext } from "../contexts/SneakerContext";
 
 function SneakerForm() {
+  const { addSneakerForm, setAddSneakerForm } = useContext(sneakerContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { handleSubmit, register } = useForm();
-  const [invoice, setInvoice] = useState(null);
-  const [photo, setPhoto] = useState(null);
+
   const url = "http://localhost:8080/";
 
-  // function handleInvoice(e) {
-  //   console.log(e);
-  //   setInvoice(e.invoice[0]);
-  //   console.log(invoice);
-  // }
-  //
-  // function handlePhoto(e) {
-  //   let file = e.photo[0];
-  //   setPhoto(file);
-  //   console.log(photo);
-  // }
-
   async function onFormSubmit(data) {
-    // data.preventDefault();
-    console.log(data);
+    setLoading(true);
 
-    let invoiceData = new FormData();
-    invoiceData.append("invoice", invoice);
-    console.log(invoiceData);
+    let formData = new FormData();
 
-    let photoData = new FormData();
-    invoiceData.append("photo", photo);
-    console.log(photoData);
+    formData.append("sneakerName", data.sneakerName);
+    formData.append("size", data.size);
+    formData.append("priceBought", data.price);
+    formData.append("pid", data.stylecode);
+    formData.append("photo", data.photo[0]);
 
-    console.log(data.invoice[0]);
-
-    const response = axios.post(
-      url + "sneakers",
-      {
-        sneakerName: data.sneakerName,
-        size: data.size,
-        priceBought: data.price,
-        pid: data.stylecode,
-        dateBought: new Date().toJSON(),
-        invoice: data.invoice[0],
-        photo: data.photo[0],
+    const response = axios.post(url + "sneakers", formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "content-type": "mulitpart/form-data",
       },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "content-type": "mulitpart/form-data",
-        },
-      }
-    );
+    });
+
+    setLoading(false);
+    setAddSneakerForm(false);
   }
 
   return (
@@ -95,35 +72,32 @@ function SneakerForm() {
               {...register("size")}
             />
             <label>
-              Upload Invoice
-              <input
-                value={invoice}
-                id={"invoice"}
-                onClick={(e) => (e.target.value = null)}
-                type={"file"}
-                name={"invoice"}
-                // onChange={() => handleInvoice()}
-                {...register("invoice")}
-              />
-            </label>
-            <label>
               Upload Picture
               <input
-                value={photo}
-                onClick={(e) => (e.target.value = null)}
                 type={"file"}
-                // onChange={(e) => handlePhoto(e)}
+                onClick={(e) => (e.target.value = null)}
                 name={"photo"}
                 {...register("photo")}
               />
             </label>
           </fieldset>
         </div>
-        <button type={"button"} id={"cancel"}>
-          Cancel
-        </button>
-        <button type={"submit"} id={"add"}>
+        <button
+          disabled={loading}
+          type={"submit"}
+          id={"add"}
+          className={"conf-button"}
+        >
           Add
+        </button>
+        <button
+          className={"conf-button"}
+          disabled={loading}
+          type={"button"}
+          id={"cancel"}
+          onClick={() => setAddSneakerForm(false)}
+        >
+          Cancel
         </button>
       </form>
     </div>

@@ -6,6 +6,7 @@
     height: 220px;
     width: 500px;
     border-radius: 20px;
+    justify-content: center;
 }
 
 .fieldset-container{
@@ -17,32 +18,28 @@ fieldset{
     display: flex;
     flex-direction: column;
     border: 0;
-    align-items: center;
-}
-
-.upload{
-    width: 200px;
-    height: 35px;
-    background-color: #acacb9;
-    color: #24242A;
-    line-height: 10px;
-    margin: auto;
 }
 
 #add{
-    height: 35px;
-    width: 150px;
     background: green;
-    line-height: 10px;
 }
 #cancel{
-    height: 35px;
-    width: 150px;
+
     background: red;
-    line-height: 10px;
+
 }
 
 .form-header{
     text-align: center;
     font-size: 25px;
+}
+
+.conf-button{
+    margin: 5px;
+    height: 35px;
+    width: 150px;
+    line-height: 10px;
+    border-radius: 8px;
+    border: none;
+    align-self: flex-end;
 }

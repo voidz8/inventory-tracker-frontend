@@ -1,13 +1,22 @@
 import { createContext, useEffect, useState } from "react";
 
+export const sneakerContext = createContext({});
+
 function SneakerContextProvider(props) {
-  const [sold, setSold] = useState(false);
+  const [saleMenuOpen, setSaleMenuOpen] = useState(false);
+  const [addSneakerForm, setAddSneakerForm] = useState(false);
 
-  async function markAsSold() {
-    setSold(true);
-  }
-
-  useEffect(() => {}, []);
+  const data = {
+    saleMenuOpen,
+    setSaleMenuOpen,
+    addSneakerForm,
+    setAddSneakerForm,
+  };
+  return (
+    <sneakerContext.Provider value={data}>
+      {props.children}
+    </sneakerContext.Provider>
+  );
 }
 
 export default SneakerContextProvider;
