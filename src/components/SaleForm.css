@@ -1,0 +1,30 @@
+.sale-container{
+    display: flex;
+    flex-direction: column;
+    height: 175px;
+    width: 500px;
+    background-color: #525260;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-h{
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+#s-c{
+    margin-right: 10px;
+}
+
+#s-p{
+    border-radius: 3px;
+}

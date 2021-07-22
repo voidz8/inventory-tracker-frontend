@@ -6,15 +6,18 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContext";
 import SneakerContextProvider from "./contexts/SneakerContext";
+import ItemContextProvider from "./contexts/ItemContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <SneakerContextProvider>
-        <AuthContextProvider>
-          <App />
-        </AuthContextProvider>
-      </SneakerContextProvider>
+      <ItemContextProvider>
+        <SneakerContextProvider>
+          <AuthContextProvider>
+            <App />
+          </AuthContextProvider>
+        </SneakerContextProvider>
+      </ItemContextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

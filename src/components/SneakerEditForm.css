@@ -1,0 +1,19 @@
+.edit-form-container{
+    display: flex;
+    height: 250px;
+    width: 500px;
+    background-color: #525260;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-btn-div{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.red-button{
+    background-color: red;
+    align-self: flex-end;
+}

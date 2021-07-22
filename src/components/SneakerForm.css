@@ -24,9 +24,7 @@ fieldset{
     background: green;
 }
 #cancel{
-
     background: red;
-
 }
 
 .form-header{
@@ -41,5 +39,9 @@ fieldset{
     line-height: 10px;
     border-radius: 8px;
     border: none;
-    align-self: flex-end;
+}
+
+.form-btn{
+    display: flex;
+    justify-content: flex-end;
 }

@@ -7,6 +7,22 @@ body{
     background-color: #24242A;
 }
 
+button{
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+}
 button:hover{
     cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    transform: scale(1.1) perspective(2px);
+}
+
+button:disabled{
+    cursor: default;
+    transform: none;
 }

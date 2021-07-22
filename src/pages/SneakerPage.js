@@ -3,92 +3,85 @@ import { useHistory } from "react-router-dom";
 import TopMenu from "../components/TopMenu";
 import SneakerForm from "../components/SneakerForm";
 import "./SneakerPage.css";
-import SneakerItem from "../components/SneakerItem";
+import Item from "../components/Item";
 import axios from "axios";
 import { sneakerContext } from "../contexts/SneakerContext";
+import SneakerEditForm from "../components/SneakerEditForm.js";
+import SaleForm from "../components/SaleForm";
+import DeleteConfirmation from "../components/DeleteConfirmation";
+import ErrorMessage from "../components/ErrorMessage";
 
 function SneakerPage() {
   const history = useHistory();
   const [sneakers, setSneakers] = useState([]);
-  const [imagesWithId, setImagesWithId] = useState([]);
-  const { addSneakerForm, setAddSneakerForm } = useContext(sneakerContext);
+  const [loading, setLoading] = useState(false);
+  const {
+    sneakerFormOpen,
+    setSneakerFormOpen,
+    sneakerEditFormOpen,
+    saleMenuOpen,
+    isFormOpen,
+    deleteConf,
+    sneakerError,
+    setSneakerError,
+  } = useContext(sneakerContext);
 
-  useEffect(async () => {
-    await fetchData();
-  }, []);
-
-  function getSneakerData() {
-    try {
-      axios
-        .get("http://localhost:8080/sneakers/all", {
+  useEffect(() => {
+    async function getSneakerData() {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:8080/sneakers/all", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        })
-        .then((response) => setSneakers(response.data));
-    } catch (e) {
-      console.error(e);
+        });
+        setSneakers(response.data);
+      } catch (e) {
+        setSneakerError(e);
+      }
     }
-    return sneakers;
-  }
-
-  function getSneakerImages(sneakers) {
-    for (const sneaker of sneakers) {
-      console.log(sneaker);
-      try {
-        axios
-          .get("http://localhost:8080/sneakers/image", {
-            params: {
-              sneakerId: sneaker.id,
-            },
-          })
-          .then((response) =>
-            setImagesWithId({ image: response.data, sneakerId: sneaker.id })
-          );
-      } catch (e) {}
-    }
-  }
-
-  function fetchData() {
     getSneakerData();
-    getSneakerImages(sneakers);
-  }
-
-  function getImage(sneaker) {
-    if (sneaker.id === imagesWithId.id) {
-      return `data:image/png;base64${imagesWithId.image}`;
-    }
-  }
+    setLoading(false);
+  }, [isFormOpen]);
 
   return (
     <div className={"sneaker-page"}>
       <TopMenu />
+      {loading && <h1>Loading...</h1>}
+      {sneakerError && <ErrorMessage message={sneakerError} />}
+      <div className={"pop-up"}>
+        {sneakerEditFormOpen && <SneakerEditForm />}
+        {saleMenuOpen && <SaleForm />}
+        {sneakerFormOpen && <SneakerForm className={"sneaker-form"} />}
+        {deleteConf && <DeleteConfirmation />}
+      </div>
       <div className={"items"}>
         {sneakers.map((sneaker) => {
-          let image = getImage(sneaker);
-          console.log(image);
+          let image = `data:${sneaker.image.fileType};base64,${sneaker.image.data}`;
           return (
-            <SneakerItem
+            <Item
               image={image}
               className={"sneaker-item"}
               name={sneaker.sneakerName}
               date={sneaker.dateBought}
               price={sneaker.priceBought}
               size={sneaker.sneakerSize}
+              pid={sneaker.pid}
               sell={true}
+              id={sneaker.id}
+              sneaker={true}
             />
           );
         })}
-        {!addSneakerForm && (
+        {!isFormOpen() && (
           <button
             type={"button"}
-            onClick={() => setAddSneakerForm(true)}
+            onClick={() => setSneakerFormOpen(true)}
             className={"add-button"}
           >
             +
           </button>
         )}
-        {addSneakerForm && <SneakerForm className={"sneaker-form"} />}
       </div>
     </div>
   );

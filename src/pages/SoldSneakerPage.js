@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TopMenu from "../components/TopMenu";
 import axios from "axios";
-import SneakerItem from "../components/SneakerItem";
+import Item from "../components/Item";
 
 function SoldSneakerPage() {
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ function SoldSneakerPage() {
       <div className={"items"}>
         {sneakers.map((sneaker) => {
           return (
-            <SneakerItem
+            <Item
               name={sneaker.name}
               date={sneaker.dateBought}
               price={sneaker.priceBought}

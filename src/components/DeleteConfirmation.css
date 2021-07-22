@@ -1,0 +1,17 @@
+.del-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 125px;
+}
+
+.del-header{
+    font-size: 25px;
+}
+
+.del-btn{
+    display: flex;
+    margin-top: 20px;
+}

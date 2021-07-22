@@ -10,9 +10,8 @@ import axios from "axios";
 import { sneakerContext } from "../contexts/SneakerContext";
 
 function SneakerForm() {
-  const { setAddSneakerForm } = useContext(sneakerContext);
+  const { setSneakerFormOpen, setSneakerError } = useContext(sneakerContext);
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
   const { handleSubmit, register } = useForm();
 
   const url = "http://localhost:8080/";
@@ -25,18 +24,22 @@ function SneakerForm() {
     formData.append("sneakerName", data.sneakerName);
     formData.append("size", data.size);
     formData.append("priceBought", data.price);
-    formData.append("pid", data.stylecode);
+    formData.append("pid", data.style);
     formData.append("photo", data.photo[0]);
 
-    axios.post(url + "sneakers", formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "content-type": "mulitpart/form-data",
-      },
-    });
+    try {
+      axios.post(url + "sneakers", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "content-type": "mulitpart/form-data",
+        },
+      });
+    } catch (e) {
+      setSneakerError("Error while adding item. " + e);
+    }
 
     setLoading(false);
-    setAddSneakerForm(false);
+    setSneakerFormOpen(false);
   }
 
   return (
@@ -48,8 +51,7 @@ function SneakerForm() {
             <IconInputField
               icon={sneakericon}
               placeholder={"SNEAKER NAME"}
-              maxlength={35}
-              {...register("sneakerName")}
+              {...register("sneakerName", { required: true, maxLength: 35 })}
             />
             <IconInputField
               name={"price"}
@@ -61,7 +63,7 @@ function SneakerForm() {
               name={"stylecode"}
               icon={stylecodeicon}
               placeholder={"STYLECODE"}
-              {...register("stylecode")}
+              {...register("style")}
             />
           </fieldset>
           <fieldset id={"second-fieldset"}>
@@ -82,23 +84,25 @@ function SneakerForm() {
             </label>
           </fieldset>
         </div>
-        <button
-          disabled={loading}
-          type={"submit"}
-          id={"add"}
-          className={"conf-button"}
-        >
-          Add
-        </button>
-        <button
-          className={"conf-button"}
-          disabled={loading}
-          type={"button"}
-          id={"cancel"}
-          onClick={() => setAddSneakerForm(false)}
-        >
-          Cancel
-        </button>
+        <div className={"form-btn"}>
+          <button
+            disabled={loading}
+            type={"submit"}
+            id={"add"}
+            className={"conf-button"}
+          >
+            Add
+          </button>
+          <button
+            className={"conf-button"}
+            disabled={loading}
+            type={"button"}
+            id={"cancel"}
+            onClick={() => setSneakerFormOpen(false)}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

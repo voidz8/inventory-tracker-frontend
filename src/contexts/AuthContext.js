@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export const authContext = createContext({});
@@ -8,6 +7,7 @@ function AuthContextProvider(props) {
   const history = useHistory();
   const url = "http://localhost:8080/";
   const [authState, setAuthState] = useState({ user: null, status: "pending" });
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -17,33 +17,28 @@ function AuthContextProvider(props) {
       setAuthState({ user: null, status: "done" });
       history.push("/login");
     }
-  }, []);
-
-  // async function getUserInfo(token) {
-  //   try {
-  //     const response = await axios.get(url + "/user", {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  }, [authenticated]);
 
   function login(token) {
     localStorage.setItem("token", token);
+    setAuthenticated(true);
   }
 
   function logout() {
     localStorage.removeItem("token");
     setAuthState({ user: null, status: "done" });
     history.push("/login");
+    setAuthenticated(false);
   }
 
-  function showSignIn() {
-    return authState.user != null;
-  }
-
-  const data = { authState, setAuthState, login, logout };
+  const data = {
+    authState,
+    setAuthState,
+    login,
+    logout,
+    url,
+    authenticated,
+  };
   return (
     <authContext.Provider value={data}>{props.children}</authContext.Provider>
   );

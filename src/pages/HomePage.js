@@ -5,6 +5,7 @@ import authContext from "../contexts/AuthContext";
 import axios from "axios";
 import Chart from "../components/Chart";
 import "./HomePage.css";
+import { sortByDate } from "../helpers/DateConverter";
 
 function HomePage() {
   const authData = useContext(authContext);
@@ -28,12 +29,6 @@ function HomePage() {
     setItemData(itemResponse.data.sort(sortByDate));
     setBotData(botResponse.data.sort(sortByDate));
   }, []);
-
-  function sortByDate(a, b) {
-    let dateA = new Date(a.date),
-      dateB = new Date(b.date);
-    return dateA - dateB;
-  }
 
   return (
     <div className={"HomePage"}>

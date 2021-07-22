@@ -2,26 +2,40 @@
     padding: 0;
     margin: 0;
 }
-
-.items {
+.sneaker-page{
     display: flex;
+    flex-direction: column;
+}
+
+.pop-up{
+    margin:0;
+    position: absolute;
+    z-index: 1;
+    background-color: #525260;
+    top: 30%;
+    left: 30%;
+    border-radius: 30px;
+}
+
+.items{
+    display: flex;
+    position: relative;
     margin: 20px;
     flex-wrap: wrap;
 }
+
 
 .sneaker-item {
     flex: 1 0 33%;
 }
 
-.sneaker-form {
-}
 
 .add-button {
     background-color: #acacb9;
     width: 50px;
     height: 50px;
     align-self: center;
-    margin: 0 auto;
+    margin: 0 auto !important;
     border: none;
     border-radius: 25px;
     font-size: 30px;
@@ -29,9 +43,7 @@
 
 .add-button:hover{
     background-color: green;
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    font-size: 35px;
-    transition: all 0.5s;
+    transform: scale(1.1) perspective(2px);
+    border-radius: 25px;
+    font-size: 30px;
 }

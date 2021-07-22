@@ -8,7 +8,10 @@ function DropDown(props) {
 
   return (
     <div className={"menu-container"}>
-      <button className={"menu-btn"} onClick={handleClick}>
+      <button
+        className={open ? "menu-btn-open" : "menu-btn"}
+        onClick={handleClick}
+      >
         {props.name}
       </button>
       <div className={"dropdown"}>

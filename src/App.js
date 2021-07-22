@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import SoldSneakerPage from "./pages/SoldSneakerPage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
       </Route>
       <Route>
         <SignUpPage exact path={"/sign-up"} />
+      </Route>
+      <Route>
+        <SettingsPage exact path={"/settings"} />
       </Route>
     </Switch>
   );
