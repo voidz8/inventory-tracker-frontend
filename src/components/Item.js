@@ -88,7 +88,7 @@ function Item({
             {sell && (
               <div className={"item-fields"}>
                 {sneaker && <h3>Stylecode: {pid}</h3>}
-                {size !== null && <h3>Size: {size}</h3>}
+                {size && <h3>Size: {size}</h3>}
                 <h3>Price: {price}</h3>
                 <h3>Date: {date}</h3>
               </div>
@@ -98,7 +98,7 @@ function Item({
         {!sell && (
           <div className={"item-fields"}>
             {sneaker && <h3>Stylecode: {pid}</h3>}
-            {size !== null && <h3>Size: {size}</h3>}
+            {size && <h3>Size: {size}</h3>}
             <h3>Price: ${price}</h3>
             <h3>Price Sold: ${priceSold}</h3>
             <h3>Date: {date}</h3>

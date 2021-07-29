@@ -7,17 +7,20 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContext";
 import SneakerContextProvider from "./contexts/SneakerContext";
 import ItemContextProvider from "./contexts/ItemContext";
+import BotContextProvider from "./contexts/BotContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ItemContextProvider>
-        <SneakerContextProvider>
-          <AuthContextProvider>
-            <App />
-          </AuthContextProvider>
-        </SneakerContextProvider>
-      </ItemContextProvider>
+      <BotContextProvider>
+        <ItemContextProvider>
+          <SneakerContextProvider>
+            <AuthContextProvider>
+              <App />
+            </AuthContextProvider>
+          </SneakerContextProvider>
+        </ItemContextProvider>
+      </BotContextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

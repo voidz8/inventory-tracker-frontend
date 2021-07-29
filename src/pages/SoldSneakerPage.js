@@ -6,7 +6,7 @@ import Item from "../components/Item";
 function SoldSneakerPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [sneakers, setSneakers] = useState([]);
+  const [soldSneakers, setSoldSneakers] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -21,7 +21,7 @@ function SoldSneakerPage() {
             },
           }
         );
-        setSneakers(response.data);
+        setSoldSneakers(response.data);
         console.log(response.data);
       } catch (e) {
         console.error("Couldn't load page: " + e);
@@ -49,7 +49,7 @@ function SoldSneakerPage() {
     <div>
       <TopMenu />
       <div className={"items"}>
-        {sneakers.map((sneaker) => {
+        {soldSneakers.map((sneaker) => {
           return (
             <Item
               name={sneaker.name}

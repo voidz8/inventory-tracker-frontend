@@ -8,7 +8,7 @@ import { authContext } from "../contexts/AuthContext";
 
 function SignInPage() {
   const url = "http://localhost:8080/";
-  const { login, setAuthState } = useContext(authContext);
+  const { login } = useContext(authContext);
   const history = useHistory();
 
   const { handleSubmit, register } = useForm();
@@ -20,7 +20,6 @@ function SignInPage() {
         password: data.password,
       });
       login(response.data.token);
-      setAuthState({ user: data.username, status: "done" });
       history.push("/");
     } catch (e) {
       console.error(e);

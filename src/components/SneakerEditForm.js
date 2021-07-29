@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { sneakerContext } from "../contexts/SneakerContext";
-import { authContext } from "../contexts/AuthContext";
 import axios from "axios";
 import IconInputField from "./IconInputfield";
 import sneakericon from "../assets/sneaker-icon.png";
@@ -9,10 +8,8 @@ import priceicon from "../assets/dollar.png";
 import stylecodeicon from "../assets/stylecode-icon.png";
 import sizeicon from "../assets/size.png";
 import "./SneakerEditForm.css";
-import ErrorMessage from "./ErrorMessage";
 
 function SneakerEditForm() {
-  const { url, header } = useContext(authContext);
   const {
     setSneakerEditFormOpen,
     sneaker,
@@ -69,6 +66,7 @@ function SneakerEditForm() {
         <div className={"fieldset-container"}>
           <fieldset>
             <IconInputField
+              type={"text"}
               value={sneakerName}
               icon={sneakericon}
               placeholder={"SNEAKER NAME"}
@@ -76,6 +74,7 @@ function SneakerEditForm() {
               onChange={(e) => handleNameChange(e)}
             />
             <IconInputField
+              type={"text"}
               value={priceBought}
               icon={priceicon}
               placeholder={"PRICE"}
@@ -85,6 +84,7 @@ function SneakerEditForm() {
           </fieldset>
           <fieldset>
             <IconInputField
+              type={"text"}
               value={pid}
               icon={stylecodeicon}
               placeholder={"STYLECODE"}
@@ -92,6 +92,7 @@ function SneakerEditForm() {
               onChange={(e) => handlePidChange(e)}
             />
             <IconInputField
+              type={"text"}
               value={size}
               icon={sizeicon}
               placeholder={"SIZE"}

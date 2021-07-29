@@ -29,7 +29,7 @@ function TopMenu() {
           <DropDownItem to={""} name={"Residential-Proxies"} />
         </DropDown>
         <DropDown name={"BOTS"}>
-          <DropDownItem to={""} name={"Bot-Inventory"} />
+          <DropDownItem to={"/bots"} name={"Bot-Inventory"} />
           <DropDownItem to={""} name={"Bot Sales"} />
         </DropDown>
       </nav>

@@ -39,6 +39,7 @@ function ItemEditForm() {
         <div className={"fieldset-container"}>
           <fieldset>
             <IconInputField
+              type={"text"}
               value={itemName}
               name={"itemName"}
               icon={itemicon}
@@ -47,6 +48,7 @@ function ItemEditForm() {
               onChange={(e) => handleNameChange(e)}
             />
             <IconInputField
+              type={"text"}
               value={priceBought}
               icon={priceicon}
               placeholder={"PRICE"}
@@ -54,6 +56,7 @@ function ItemEditForm() {
               onChange={(e) => handlePriceChange(e)}
             />
             <IconInputField
+              type={"text"}
               value={size}
               icon={sizeicon}
               placeholder={"SIZE"}

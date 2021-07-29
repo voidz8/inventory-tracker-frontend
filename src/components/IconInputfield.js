@@ -1,11 +1,18 @@
 import React from "react";
 import "./IconInputfield.css";
 
-function IconInputfield({ placeholder, icon, maxlength, name, ...props }) {
+function IconInputfield({
+  placeholder,
+  icon,
+  maxlength,
+  name,
+  type,
+  ...props
+}) {
   return (
     <div className={"input-field"}>
       <input
-        type={"text"}
+        type={type}
         name={name}
         placeholder={placeholder}
         className={"input"}

@@ -40,6 +40,7 @@ function SaleForm() {
           <h3 className={"s-h"}>For how much dit you sold your</h3>
           <h3>{sneaker.sneakerName}?</h3>
           <IconInputfield
+            type={"text"}
             id={"s-p"}
             name={"salePrice"}
             icon={priceicon}

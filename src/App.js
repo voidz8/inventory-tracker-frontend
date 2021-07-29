@@ -10,6 +10,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import SoldSneakerPage from "./pages/SoldSneakerPage";
 import SettingsPage from "./pages/SettingsPage";
+import SoldItemPage from "./pages/SoldItemPage";
 
 function App() {
   return (
@@ -17,32 +18,35 @@ function App() {
       <Route exact path={"/"}>
         <HomePage />
       </Route>
-      <Route path={"/sneakers"}>
+      <Route exact path={"/sneakers"}>
         <SneakerPage />
       </Route>
-      <Route path={"/items"}>
+      <Route exact path={"/items"}>
         <ItemPage />
       </Route>
-      <Route path={"/proxies"}>
+      <Route exact path={"/proxies"}>
         <ProxyPage />
       </Route>
-      <Route path={"/bots"}>
+      <Route exact path={"/bots"}>
         <BotPage />
       </Route>
-      <Route path={"/profile"}>
+      <Route exact path={"/profile"}>
         <ProfilePage />
       </Route>
-      <Route path={"/login"}>
+      <Route exact path={"/login"}>
         <SignInPage />
       </Route>
-      <Route>
-        <SoldSneakerPage exact path={"sold-sneakers"} />
+      <Route exact path={"sold-sneakers"}>
+        <SoldSneakerPage />
       </Route>
-      <Route>
-        <SignUpPage exact path={"/sign-up"} />
+      <Route exact path={"/sign-up"}>
+        <SignUpPage />
       </Route>
-      <Route>
-        <SettingsPage exact path={"/settings"} />
+      <Route exact path={"/settings"}>
+        <SettingsPage />
+      </Route>
+      <Route exact path={"/sold-items"}>
+        <SoldItemPage />
       </Route>
     </Switch>
   );
