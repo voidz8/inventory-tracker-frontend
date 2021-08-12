@@ -7,6 +7,7 @@ body{
     background-color: #24242A;
 }
 
+
 button{
     border: none;
     border-radius: 8px;
@@ -23,6 +24,6 @@ button:hover{
 }
 
 button:disabled{
-    cursor: default;
+    cursor: not-allowed;
     transform: none;
 }

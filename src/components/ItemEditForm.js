@@ -9,8 +9,7 @@ import sizeicon from "../assets/size.png";
 
 function ItemEditForm() {
   const [loading, setLoading] = useState(false);
-  const { itemEditFormOpen, setItemEditFormOpen, setItemError, item } =
-    useContext(itemContext);
+  const { setItemEditFormOpen, setItemError, item } = useContext(itemContext);
   const { register, handleSubmit } = useForm();
   const [itemName, setItemName] = useState(item.itemName);
   const [size, setSize] = useState(item.size);

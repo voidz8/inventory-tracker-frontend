@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import TopMenu from "../components/TopMenu";
 import SneakerForm from "../components/SneakerForm";
 import "./SneakerPage.css";
@@ -10,9 +9,9 @@ import SneakerEditForm from "../components/SneakerEditForm.js";
 import SaleForm from "../components/SaleForm";
 import DeleteConfirmation from "../components/DeleteConfirmation";
 import ErrorMessage from "../components/ErrorMessage";
+import { authContext } from "../contexts/AuthContext";
 
 function SneakerPage() {
-  const history = useHistory();
   const [sneakers, setSneakers] = useState([]);
   const [loading, setLoading] = useState(false);
   const {
@@ -25,6 +24,7 @@ function SneakerPage() {
     sneakerError,
     setSneakerError,
   } = useContext(sneakerContext);
+  const { authenticated } = useContext(authContext);
 
   useEffect(() => {
     async function getSneakerData() {
@@ -37,51 +37,54 @@ function SneakerPage() {
         });
         setSneakers(response.data);
       } catch (e) {
-        setSneakerError(e);
+        setSneakerError(e.response.message);
       }
     }
+
     getSneakerData();
     setLoading(false);
   }, [isFormOpen]);
 
   return (
-    <div className={"sneaker-page"}>
-      <TopMenu />
-      {loading && <h1>Loading...</h1>}
-      {sneakerError && <ErrorMessage message={sneakerError} />}
-      <div className={"pop-up"}>
-        {sneakerEditFormOpen && <SneakerEditForm />}
-        {saleMenuOpen && <SaleForm />}
-        {sneakerFormOpen && <SneakerForm className={"sneaker-form"} />}
-        {deleteConf && <DeleteConfirmation />}
-      </div>
-      <div className={"items"}>
-        {sneakers.map((sneaker) => {
-          let image = `data:${sneaker.image.fileType};base64,${sneaker.image.data}`;
-          return (
-            <Item
-              image={image}
-              className={"sneaker-item"}
-              name={sneaker.sneakerName}
-              date={sneaker.dateBought}
-              price={sneaker.priceBought}
-              size={sneaker.sneakerSize}
-              pid={sneaker.pid}
-              sell={true}
-              id={sneaker.id}
-              sneaker={true}
-            />
-          );
-        })}
-        {!isFormOpen() && (
-          <button
-            type={"button"}
-            onClick={() => setSneakerFormOpen(true)}
-            className={"add-button"}
-          >
-            +
-          </button>
-        )}
+    <div className={loading ? "loading-cursor" : ""}>
+      <div className={"sneaker-page"}>
+        <TopMenu />
+        <header className={"title"}>Sneaker Inventory</header>
+        {sneakerError && <ErrorMessage message={sneakerError} />}
+        <div className={"pop-up"}>
+          {sneakerEditFormOpen && <SneakerEditForm />}
+          {saleMenuOpen && <SaleForm variety={"sneaker"} />}
+          {sneakerFormOpen && <SneakerForm className={"sneaker-form"} />}
+          {deleteConf && <DeleteConfirmation variety={"sneaker"} />}
+        </div>
+        <div className={"items"}>
+          {sneakers.map((sneaker) => {
+            let image = `data:${sneaker.image.fileType};base64,${sneaker.image.data}`;
+            return (
+              <Item
+                image={image}
+                className={"sneaker-item"}
+                name={sneaker.sneakerName}
+                date={sneaker.dateBought}
+                price={sneaker.priceBought}
+                size={sneaker.sneakerSize}
+                pid={sneaker.pid}
+                sell={true}
+                id={sneaker.id}
+                variety={"sneaker"}
+              />
+            );
+          })}
+          {authenticated && !isFormOpen() && (
+            <button
+              type={"button"}
+              onClick={() => setSneakerFormOpen(true)}
+              className={"add-button"}
+            >
+              +
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

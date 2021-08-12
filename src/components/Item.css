@@ -1,26 +1,21 @@
-* {
-    padding: 0;
-    margin: 0;
-}
-
 .item-container{
     display: flex;
     flex-direction: column;
     width: 600px;
-    height: 220px;
+    height: 250px;
     background-color: #525260;
     border-radius: 20px;
-    margin: 20px;
+    margin: 20px 50px;
 }
 
 .form-open-container{
     display: flex;
     flex-direction: column;
     width: 600px;
-    height: 220px;
+    height: 250px;
     background-color: #525260;
     border-radius: 20px;
-    margin: 20px;
+    margin: 20px 50px;
     opacity: 0.2;
 }
 
@@ -48,8 +43,7 @@ h3{
 
 .item-button-group{
     display: flex;
-    align-self: flex-end;
-    margin-top: -30px;
+    width: 100%;
     margin-right: 10px;
 }
 
@@ -66,7 +60,7 @@ h3{
 
 .image-buttons{
     display: flex;
-    margin-right: 450px;
+    margin-left: 10px;
 }
 
 .img-btn{
@@ -77,6 +71,11 @@ h3{
     width: 30px;
     align-self: center;
     margin-left: 5px;
+}
+
+.sold-button{
+    margin-right: 10px;
+    margin-left: auto;
 }
 
 #edit-button{

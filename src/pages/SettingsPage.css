@@ -16,3 +16,21 @@
     margin-left: 5px;
     color: white;
 }
+
+.edit-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.white-h3{
+    color: white;
+    background: #acacb9;
+    border: solid 2px white;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.login{
+    margin-top: 5px;
+}

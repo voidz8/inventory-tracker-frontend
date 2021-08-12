@@ -23,13 +23,13 @@ function DropDown(props) {
   return (
     <div className={"menu-container"}>
       <button
-        ref={ref}
         className={open ? "menu-btn-open" : "menu-btn"}
         onClick={handleClick}
+        disabled={props.disabled}
       >
         {props.name}
       </button>
-      <div className={"dropdown"}>
+      <div className={"dropdown"} ref={ref}>
         {open && <ul className={"menu-list"}>{props.children}</ul>}
       </div>
     </div>

@@ -20,26 +20,23 @@ function SignUpPage() {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.post(url + "signup", {
+      await axios.post(url + "signup", {
         email: data.email,
         username: data.username,
         password: data.password,
       });
-
       setRegisterSuccess(true);
-
       setTimeout(() => {
         history.push("/login");
       }, 3000);
     } catch (e) {
-      console.error(e);
-      setError(`Registration failed. Try again (${e.message})`);
+      setError(`Registration failed. Try again ` + e.response.data.message);
     }
     setLoading(false);
   }
 
   return (
-    <div>
+    <div className={loading ? "loading-cursor" : ""}>
       <TopMenu />
       <div className={"page-container"}>
         <form className={"auth-form"} onSubmit={handleSubmit(onSubmit)}>

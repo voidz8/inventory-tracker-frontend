@@ -4,6 +4,7 @@ import { sneakerContext } from "../contexts/SneakerContext";
 import editIcon from "../assets/edit.png";
 import trashIcon from "../assets/trash.png";
 import { itemContext } from "../contexts/ItemContext";
+import { botContext } from "../contexts/BotContext";
 
 function Item({
   name,
@@ -16,7 +17,7 @@ function Item({
   priceSold,
   id,
   pid,
-  sneaker,
+  variety,
 }) {
   const {
     saleMenuOpen,
@@ -30,8 +31,10 @@ function Item({
   const { isItemFormOpen, setItemEditFormOpen, setItem } =
     useContext(itemContext);
 
+  const { setBotEditFormOpen, setBot, isBotFormOpen } = useContext(botContext);
+
   const onEditClick = () => {
-    if (sneaker) {
+    if (variety === "sneaker") {
       setSneakerEditFormOpen(true);
       setSneaker({
         sneakerId: id,
@@ -40,7 +43,8 @@ function Item({
         priceBought: price,
         pid: pid,
       });
-    } else {
+    }
+    if (variety === "item") {
       setItemEditFormOpen(true);
       setItem({
         itemId: id,
@@ -49,33 +53,81 @@ function Item({
         priceBought: price,
       });
     }
+    if (variety === "bot") {
+      setBotEditFormOpen(true);
+      setBot({
+        botId: id,
+        botName: name,
+        priceBought: price,
+      });
+    }
   };
 
   const onDeleteClick = () => {
-    setDeleteConf(true);
-    setSneaker({
-      sneakerId: id,
-      sneakerName: name,
-      size: size,
-      priceBought: price,
-      pid: pid,
-    });
+    if (variety === "sneaker") {
+      setDeleteConf(true);
+      setSneaker({
+        sneakerId: id,
+        sneakerName: name,
+        size: size,
+        priceBought: price,
+        pid: pid,
+      });
+    }
+    if (variety === "item") {
+      setDeleteConf(true);
+      setItem({
+        itemId: id,
+        itemName: name,
+        size: size,
+        priceBought: price,
+      });
+    }
+    if (variety === "bot") {
+      setDeleteConf(true);
+      setBot({
+        botId: id,
+        botName: name,
+        priceBought: price,
+      });
+    }
+    console.log(variety);
   };
 
   const onSoldClick = () => {
-    setSaleMenuOpen(true);
-    setSneaker({
-      sneakerId: id,
-      sneakerName: name,
-      size: size,
-      priceBought: price,
-      pid: pid,
-    });
+    if (variety === "sneaker") {
+      setSaleMenuOpen(true);
+      setSneaker({
+        sneakerId: id,
+        sneakerName: name,
+        size: size,
+        priceBought: price,
+        pid: pid,
+      });
+    }
+    if (variety === "item") {
+      setSaleMenuOpen(true);
+      setItem({
+        itemId: id,
+        itemName: name,
+        size: size,
+        priceBought: price,
+      });
+    }
+    if (variety === "bot") {
+      setSaleMenuOpen(true);
+      setBot({
+        botId: id,
+        botName: name,
+        priceBought: price,
+      });
+    }
   };
+
   return (
     <div
       className={
-        isFormOpen() || isItemFormOpen()
+        isFormOpen() || isItemFormOpen() || isBotFormOpen()
           ? "form-open-container"
           : "item-container"
       }
@@ -87,7 +139,7 @@ function Item({
             <img src={image} alt="image" />
             {sell && (
               <div className={"item-fields"}>
-                {sneaker && <h3>Stylecode: {pid}</h3>}
+                {variety === "sneaker" && <h3>Stylecode: {pid}</h3>}
                 {size && <h3>Size: {size}</h3>}
                 <h3>Price: {price}</h3>
                 <h3>Date: {date}</h3>
@@ -97,7 +149,7 @@ function Item({
         )}
         {!sell && (
           <div className={"item-fields"}>
-            {sneaker && <h3>Stylecode: {pid}</h3>}
+            {variety === "sneaker" && <h3>Stylecode: {pid}</h3>}
             {size && <h3>Size: {size}</h3>}
             <h3>Price: ${price}</h3>
             <h3>Price Sold: ${priceSold}</h3>
@@ -124,14 +176,16 @@ function Item({
               <img id="edit-button" src={editIcon} alt={"edit"} />
             </button>
           </div>
-          <button
-            disabled={sneakerEditFormOpen}
-            type={"button"}
-            className={"green-button"}
-            onClick={() => onSoldClick()}
-          >
-            Sold
-          </button>
+          <div className={"sold-button"}>
+            <button
+              disabled={sneakerEditFormOpen}
+              type={"button"}
+              className={"green-button"}
+              onClick={() => onSoldClick()}
+            >
+              Sold
+            </button>
+          </div>
         </div>
       )}
     </div>

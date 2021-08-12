@@ -18,15 +18,17 @@
 }
 
 .items{
+    margin-left: 5%;
     display: flex;
-    position: relative;
-    margin: 20px;
     flex-wrap: wrap;
 }
 
+.sneaker-item{
+    width: 100%;
+}
 
-.sneaker-item {
-    flex: 1 0 33%;
+.items > div{
+    flex: 0 0 40%;
 }
 
 
@@ -35,7 +37,7 @@
     width: 50px;
     height: 50px;
     align-self: center;
-    margin: 0 auto !important;
+    margin: 0 21.9%;
     border: none;
     border-radius: 25px;
     font-size: 30px;
@@ -46,4 +48,11 @@
     transform: scale(1.1) perspective(2px);
     border-radius: 25px;
     font-size: 30px;
+}
+
+.title{
+    align-self: center;
+    font-size: 35px;
+    text-decoration: none;
+    color: white;
 }

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function DropDownItem({ name, ...props }) {
   return (
-    <li>
+    <li key={name}>
       <NavLink className={"nav-item"} {...props}>
         {name}
       </NavLink>

@@ -1,19 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import TopMenu from "../components/TopMenu";
 import "./AuthPage.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
+import ErrorMessage from "../components/ErrorMessage";
 
 function SignInPage() {
   const url = "http://localhost:8080/";
   const { login } = useContext(authContext);
   const history = useHistory();
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { handleSubmit, register } = useForm();
 
   async function onSubmit(data) {
+    setLoading(true);
+    setError("");
     try {
       const response = await axios.post(url + "signin", {
         username: data.username,
@@ -22,12 +27,15 @@ function SignInPage() {
       login(response.data.token);
       history.push("/");
     } catch (e) {
-      console.error(e);
+      if (e.response.status === 401) {
+        setError("Bad crendentials. Please try again");
+      }
     }
+    setLoading(false);
   }
 
   return (
-    <div>
+    <div className={loading ? "loading-cursor" : ""}>
       <TopMenu />
       <div className={"page-container"}>
         <form className={"auth-form"} onSubmit={handleSubmit(onSubmit)}>
@@ -46,7 +54,7 @@ function SignInPage() {
             name={"password"}
             {...register("password")}
           />
-          <button className={"auth"} type={"submit"}>
+          <button className={"auth"} type={"submit"} disabled={loading}>
             Login
           </button>
           <p>
@@ -55,6 +63,7 @@ function SignInPage() {
           </p>
         </form>
       </div>
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 }

@@ -22,12 +22,13 @@ function SneakerForm() {
     let formData = new FormData();
 
     formData.append("sneakerName", data.sneakerName);
-    formData.append("size", data.size);
+    formData.append("sneakerSize", data.size);
     formData.append("priceBought", data.price);
     formData.append("pid", data.style);
     formData.append("photo", data.photo[0]);
 
     try {
+      console.log(data);
       axios.post(url + "sneakers", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,7 +38,6 @@ function SneakerForm() {
     } catch (e) {
       setSneakerError("Error while adding item. " + e);
     }
-
     setLoading(false);
     setSneakerFormOpen(false);
   }

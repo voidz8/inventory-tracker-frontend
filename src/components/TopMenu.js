@@ -16,33 +16,29 @@ function TopMenu() {
         <NavLink to="/" exact className={"home"}>
           HOME
         </NavLink>
-        <DropDown name={"SNEAKERS"}>
+        <DropDown name={"SNEAKERS"} disabled={!authenticated}>
           <DropDownItem to={"/sneakers"} name={"Sneaker-Inventory"} />
           <DropDownItem to={"/sold-sneakers"} name={"Sneaker-Sales"} />
         </DropDown>
-        <DropDown name={"ITEMS"}>
+        <DropDown name={"ITEMS"} disabled={!authenticated}>
           <DropDownItem to={"/items"} name={"Item-Inventory"} />
           <DropDownItem to={"/sold-items"} name={"Item-Sales"} />
         </DropDown>
-        <DropDown name={"PROXIES"}>
-          <DropDownItem to={""} name={"Datacenter-Proxies"} />
-          <DropDownItem to={""} name={"Residential-Proxies"} />
-        </DropDown>
-        <DropDown name={"BOTS"}>
+        <DropDown name={"BOTS"} disabled={!authenticated}>
           <DropDownItem to={"/bots"} name={"Bot-Inventory"} />
-          <DropDownItem to={""} name={"Bot Sales"} />
+          <DropDownItem to={"/sold-bots"} name={"Bot Sales"} />
         </DropDown>
       </nav>
-      {!authenticated && (
-        <button
-          onClick={() => history.push("/login")}
-          type={"button"}
-          className={"signin"}
-        >
-          Sign in
-        </button>
-      )}
       <div className={"my-acc"}>
+        {!authenticated && (
+          <button
+            onClick={() => history.push("/login")}
+            type={"button"}
+            className={"signin"}
+          >
+            Sign in
+          </button>
+        )}
         {authenticated && (
           <DropDown to={""} name={"My Account"}>
             <DropDownItem to={"/settings"} name={"Settings"} />

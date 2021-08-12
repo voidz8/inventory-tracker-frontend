@@ -21,24 +21,27 @@ function AuthContextProvider(props) {
       login(token);
     } else {
       setAuthState({ user: null, status: "done" });
-      history.push("/login");
     }
   }, [authenticated]);
 
   async function login(token) {
     localStorage.setItem("token", token);
-    const response = await axios.get(url + "account-info", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setAuthState({
-      user: response.data.username,
-      userId: response.data.id,
-      email: response.data.email,
-      status: "done",
-    });
-    setAuthenticated(true);
+    try {
+      const response = await axios.get(url + "account-info", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAuthState({
+        user: response.data.username,
+        userId: response.data.id,
+        email: response.data.email,
+        status: "done",
+      });
+      setAuthenticated(true);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function logout() {
@@ -48,6 +51,10 @@ function AuthContextProvider(props) {
     setAuthenticated(false);
   }
 
+  const redirect = () => {
+    history.push("/login");
+  };
+
   const data = {
     authState,
     setAuthState,
@@ -55,6 +62,7 @@ function AuthContextProvider(props) {
     logout,
     url,
     authenticated,
+    redirect,
   };
   return (
     <authContext.Provider value={data}>{props.children}</authContext.Provider>
