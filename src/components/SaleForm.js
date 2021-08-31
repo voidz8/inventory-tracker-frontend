@@ -97,6 +97,7 @@ function SaleForm({ variety }) {
             id={"s-p"}
             icon={priceicon}
             placeholder={"SALE PRICE"}
+            required={"required"}
             {...register("price")}
           />
         </div>

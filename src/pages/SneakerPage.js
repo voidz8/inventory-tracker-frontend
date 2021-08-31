@@ -29,6 +29,7 @@ function SneakerPage() {
   useEffect(() => {
     async function getSneakerData() {
       setLoading(true);
+      setSneakerError("");
       try {
         const response = await axios.get("http://localhost:8080/sneakers/all", {
           headers: {
@@ -39,10 +40,10 @@ function SneakerPage() {
       } catch (e) {
         setSneakerError(e.response.message);
       }
+      setLoading(false);
     }
 
     getSneakerData();
-    setLoading(false);
   }, [isFormOpen]);
 
   return (
