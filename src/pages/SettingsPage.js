@@ -49,7 +49,7 @@ function SettingsPage() {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.patch("http://localhost:8080/", {
+      const response = await axios.patch("http://localhost:8080/update", {
         username: data.username,
         email: data.email,
         password: data.password,
@@ -81,7 +81,7 @@ function SettingsPage() {
         setPwConfirmed(true);
       }
     } catch (e) {
-      setError(e);
+      setError(e.response.message);
     }
     setLoading(false);
   }
